@@ -2,19 +2,19 @@ apiVersion: v1
 entries:
   mayastor:
   - apiVersion: v2
-    created: "2022-03-14T19:46:00.35102833+02:00"
+    created: "2022-06-29T08:57:44.353522975+03:00"
     dependencies:
     - condition: etcd.enabled
       name: etcd
       repository: https://charts.bitnami.com/bitnami
       tags:
       - bitnami-etcd
-      version: 6.2.3
+      version: 8.3.2
     description: Mayastor Helm chart for Kubernetes
-    digest: 8a036f1ee5639b43c7d322b20332ac0b905455001ec2e78b3502cb6b90f34398
+    digest: 795e4579cfe778bbeaf4000e4dc03c7f988466ba9fb12d6d595b05f5b1a066bf
     name: mayastor
     type: application
     urls:
     - mayastor-0.0.1.tgz
     version: 0.0.1
-generated: "2022-03-14T19:46:00.346741163+02:00"
+generated: "2022-06-29T08:57:44.3480829+03:00"
