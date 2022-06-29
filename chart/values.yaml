@@ -28,6 +28,9 @@ affinity: {}
 
 serviceAccountName: ""
 
+# Busybox image to use for initContainers
+busyboxImage: busybox:latest
+
 csi:
   nvme:
     # nvme_core module io timeout in seconds

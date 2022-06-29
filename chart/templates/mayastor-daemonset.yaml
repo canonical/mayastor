@@ -32,10 +32,10 @@ spec:
       affinity: {{ .Values.affinity | toYaml | nindent 8 }}
       initContainers:
       - name: registration-probe
-        image: busybox:latest
+        image: {{ .Values.busyboxImage | quote }}
         command: ['sh', '-c', 'until nc -vz core 50051; do echo "Waiting for registration service..."; sleep 1; done;']
       - name: etcd-probe
-        image: busybox:latest
+        image: {{ .Values.busyboxImage | quote }}
         command: ['sh', '-c', 'until nc -vz {{ include "etcdEndpoint" . }} 2379; do echo "Waiting for etcd..."; sleep 1; done;']
       {{- if .Values.mayastorExtraInitContainers -}}
       {{ tpl (.Values.mayastorExtraInitContainers | toYaml) . | nindent 6 }}
