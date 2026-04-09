@@ -63,12 +63,12 @@ def nvme_connect(uri):
     nqn = u.path[1:]
 
     command = "sudo nvme connect -t tcp -s {0} -a {1} -n {2}".format(port, host, nqn)
-    subprocess.run(command, check=True, shell=True, capture_output=False)
+    subprocess.run(command, check=True, shell=True, capture_output=False)  # nosec B602
     time.sleep(1)
     command = "sudo nvme list -v -o json"
     discover = json.loads(
         subprocess.run(
-            command, shell=True, check=True, text=True, capture_output=True
+            command, shell=True, check=True, text=True, capture_output=True  # nosec B602
         ).stdout
     )
 
@@ -85,7 +85,7 @@ def nvme_id_ctrl(device):
     command = "sudo nvme id-ctrl {0} -o json".format(device)
     id_ctrl = json.loads(
         subprocess.run(
-            command, shell=True, check=True, text=True, capture_output=True
+            command, shell=True, check=True, text=True, capture_output=True  # nosec B602
         ).stdout
     )
 
@@ -97,7 +97,7 @@ def nvme_resv_report(device):
     command = "sudo nvme resv-report {0} -c 1 -o json".format(device)
     resv_report = json.loads(
         subprocess.run(
-            command, shell=True, check=True, text=True, capture_output=True
+            command, shell=True, check=True, text=True, capture_output=True  # nosec B602
         ).stdout
     )
 
@@ -112,7 +112,7 @@ def nvme_discover(uri):
 
     command = "sudo nvme discover -t tcp -s {0} -a {1}".format(port, host)
     output = subprocess.run(
-        command, check=True, shell=True, capture_output=True, encoding="utf-8"
+        command, check=True, shell=True, capture_output=True, encoding="utf-8"  # nosec B602
     )
     if not u.path[1:] in str(output.stdout):
         raise ValueError("uri {} is not discovered".format(u.path[1:]))
@@ -124,19 +124,19 @@ def nvme_disconnect(uri):
     nqn = u.path[1:]
 
     command = "sudo nvme disconnect -n {0}".format(nqn)
-    subprocess.run(command, check=True, shell=True, capture_output=True)
+    subprocess.run(command, check=True, shell=True, capture_output=True)  # nosec B602
 
 
 def nvme_disconnect_controller(name):
     """Disconnect the given NVMe controller on this host."""
     command = "sudo nvme disconnect -d {0}".format(name)
-    subprocess.run(command, check=True, shell=True, capture_output=True)
+    subprocess.run(command, check=True, shell=True, capture_output=True)  # nosec B602
 
 
 def nvme_disconnect_all():
     """Disconnect from all connected nvme subsystems"""
     command = "sudo nvme disconnect-all"
-    subprocess.run(command, check=True, shell=True, capture_output=True)
+    subprocess.run(command, check=True, shell=True, capture_output=True)  # nosec B602
 
 
 def nvme_list_subsystems(device):
@@ -144,7 +144,7 @@ def nvme_list_subsystems(device):
     command = "sudo nvme list-subsys {} -o json".format(device)
     return json.loads(
         subprocess.run(
-            command, check=True, shell=True, capture_output=True, encoding="utf-8"
+            command, check=True, shell=True, capture_output=True, encoding="utf-8"  # nosec B602
         ).stdout
     )
 
@@ -156,7 +156,7 @@ def identify_namespace(device):
     """Get properties of a namespace on this host"""
     command = "sudo nvme id-ns {}".format(device)
     output = subprocess.run(
-        command, check=True, shell=True, capture_output=True, encoding="utf-8"
+        command, check=True, shell=True, capture_output=True, encoding="utf-8"  # nosec B602
     )
     props = output.stdout.strip().split("\n")[1:]
     ns = {}
