@@ -363,7 +363,7 @@ def run_fio_against_single_path_nexus(a_client_connected_to_one_path_nexus):
     assert subsystem["Paths"][0]["State"] == "live", "I/O path is not healthy"
     # Launch fio in background and let it always run along with the test.
     fio = Fio("job2", "randwrite", dev, runtime=FIO_RUNTIME).build()
-    return subprocess.Popen(fio, shell=True)
+    return subprocess.Popen(fio, shell=True)  # nosec B602
 
 
 @when("the only I/O path degrades")
